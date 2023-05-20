@@ -4,7 +4,7 @@ var numberCharacters = ['1','2','3','4','5','6','7','8','9','0'];
 var specialCharacters = ['!','@','#','$','%','^','&','*','(',')','_','-','+','=','|','/','~','{','}','[',']','?','.',',','`',':',':','>','<'];
 
 function generatePassword() {
-
+// confirm functions create a ok or cancel option that displays. the text inside of the function displays above the answer options.
   var haveLowercase = confirm('Include lowercase characters?');
   var haveUppercase = confirm('Include uppercase characters?');
   var haveNumbers = confirm('Include numbers?');
@@ -22,7 +22,7 @@ function generatePassword() {
   }
   
 
-
+// the if else if statements are checking to see if the values are true. When they are true they append to the CharacterOptions string.
   var characterOptions = '';
 
   if (haveLowercase) {
@@ -34,26 +34,26 @@ function generatePassword() {
   } else if (haveSpecialChar) {
     characterOptions += specialCharacters;
   }
-
+//  an alert displays if there aren't any character types selected.
   if (characterOptions === '') {
     alert('Please select at least one character type must be selected');
     return; 
   }
-
+// selects a random character from characterOptions each time
   var password = '';
   for (var i = 0; i < length; i++) {
     password += getRandomCharacter(characterOptions);
-}
-  
+  }
+  //accesses the text area above the button using the ID in HMTL. Puts the content from the password value inside of the text area
     var passwordElement = document.getElementById('password');
     passwordElement.textContent = password;
 }
-
+// gets the random characters fromt he sets for the password
 function getRandomCharacter(charset) {
   var randomIndex = Math.floor(Math.random() * charset.length);
   return charset[randomIndex];
 }
-
+// attaches the generatePassword function to the button using the id in html
 var button = document.getElementById('generate');
 generate.addEventListener('click', generatePassword);
 
