@@ -3,26 +3,28 @@ var capitalLetters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O
 var numberCharacters = ['1','2','3','4','5','6','7','8','9','0'];
 var specialCharacters = ['!','@','#','$','%','^','&','*','(',')','_','-','+','=','|','/','~','{','}','[',']','?','.',',','`',':',':','>','<'];
 
-var haveLowercase = confirm('Include lowercase characters?');
-var haveUppercase = confirm('Include uppercase characters?');
-var haveNumbers = confirm('Include numbers?');
-var haveSpecialChar = confirm('Include special characters?');
-
 function generatePassword() {
+
+  var haveLowercase = confirm('Include lowercase characters?');
+  var haveUppercase = confirm('Include uppercase characters?');
+  var haveNumbers = confirm('Include numbers?');
+  var haveSpecialChar = confirm('Include special characters?');
 
   var length = prompt('Please enter the length of the password (8-128 characters):');
   length = parseInt(length);
+
   // while loop sets for if the input is not a number or the length is less than 8 or if the length is more than 128. Causes the alert and prompt to occur
-  while(isNaN(length) || length < 8 || length > 128) {
+  while (isNaN(length) || length < 8 || length > 128) {
     alert('Wrong length entered. Please enter a number between 8 and 128.');
     length = prompt('Please enter the length of the password (8-128 characters):');
     // parseInt converts a string into an integer
     length = parseInt(length);
   }
   
-}
 
-var characterOptions = '';
+
+  var characterOptions = '';
+
   if (haveLowercase) {
     characterOptions += lowerCasedLetters;
   } else if (haveUppercase) {
@@ -31,21 +33,30 @@ var characterOptions = '';
   characterOptions += numberCharacters;
   } else if (haveSpecialChar) {
     characterOptions += specialCharacters;
-}
+  }
 
-if (characterOptions === '') {
-  alert('Please select at least one character type must be selected');
-} else {
+  if (characterOptions === '') {
+    alert('Please select at least one character type must be selected');
+    return; 
+  }
+
   var password = '';
   for (var i = 0; i < length; i++) {
     password += getRandomCharacter(characterOptions);
-  }
-  alert('Generated Password: ' + password);
+}
+  
+    var passwordElement = document.getElementById('password');
+    passwordElement.textContent = password;
 }
 
 function getRandomCharacter(charset) {
   var randomIndex = Math.floor(Math.random() * charset.length);
   return charset[randomIndex];
 }
+
+var button = document.getElementById('generate');
+generate.addEventListener('click', generatePassword);
+
+
 
 
